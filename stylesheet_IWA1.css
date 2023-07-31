@@ -81,16 +81,22 @@ body {
 }
 
 .counter__button:active {
-  background: var(--color-medium-grey);
+  background: rgb(9, 255, 0);
   transform: translateY(2%);
   -webkit-transform: translateY(2%);
   -moz-transform: translateY(2%);
   -ms-transform: translateY(2%);
   -o-transform: translateY(2%);
 }
+
 .counter__button_first {
   color: #ff0000;
+  font-size: 4rem;
   border-right: 1px solid var(--color-light-grey);
+}
+
+.counter__button_first:active {
+  background-color: #ff0000;
 }
 
 .footer {
