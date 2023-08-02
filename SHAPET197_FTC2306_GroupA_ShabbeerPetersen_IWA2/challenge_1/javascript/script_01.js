@@ -1,3 +1,5 @@
+/* This is the firstname of the user */
+
 const user = "Shabbeer";
 const lastName = "Petersen";
 
