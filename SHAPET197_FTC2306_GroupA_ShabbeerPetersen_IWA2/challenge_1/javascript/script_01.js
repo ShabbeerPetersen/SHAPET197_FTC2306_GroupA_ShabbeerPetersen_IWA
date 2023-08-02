@@ -8,6 +8,7 @@ console.log(user + " " + lastName);
 // const user = 'John';
 // const surname = 'Smith';
 // const fullName = [user, surname].join(' ');
+//// Found the '.join' solution via ChatGPT
 
 // console.log(fullName);
 
@@ -18,5 +19,3 @@ console.log(user + " " + lastName);
 // const fullName = user + ' ' + surname;
 
 // console.log(fullName);
-
-// Found other solutions on ChatGPT
