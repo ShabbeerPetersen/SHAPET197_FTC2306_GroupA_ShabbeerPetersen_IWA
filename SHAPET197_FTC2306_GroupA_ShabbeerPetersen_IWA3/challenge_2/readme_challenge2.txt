@@ -43,7 +43,7 @@ console.log('Roles:', nwabisa.role, johanes.role, alex.role)
 
     <body>
         <h1>Our Team</h1>
-        
+         
         <ul>
             <li id="nwabisa">Loading...</li>
             <li id="johannes">Loading...</li>
