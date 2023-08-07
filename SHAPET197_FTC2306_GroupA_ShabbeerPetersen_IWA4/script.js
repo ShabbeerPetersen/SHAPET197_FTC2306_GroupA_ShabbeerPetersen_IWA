@@ -20,15 +20,15 @@ if (date === 2050) {
   console.log("September", "Heritage Day");
   date = "December";
   console.log(date, "Day of Reconciliation");
-  count += 3;
+  count += 3; //simplified from "let count = count + 3"
 
   if (user === "parent") {
     console.log(date, "Christmas Day");
-    count += 1;
+    count += 1; //simplified from "let count = count + 1"
   }
 
   console.log(date, "Day of Goodwill");
-  count += 1;
+  count += 1; //simplified from "let count = count + 1"
 }
 
 console.log("Your status is:", user);
