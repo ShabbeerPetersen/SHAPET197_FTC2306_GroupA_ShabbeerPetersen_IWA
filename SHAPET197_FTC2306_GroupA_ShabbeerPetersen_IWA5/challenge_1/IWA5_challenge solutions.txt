@@ -1,0 +1,15 @@
+corrected the variable names for FREE_WARNING and BANNED_WARNING.
+
+added 'let shipping = 0' to define it.
+
+gave values to location, currency, and customers using const.
+
+removed NONE_SELECTED and just added 0 (due to lack of input functions)
+
+calculated the totalCost properly by adding up all the individual costs.
+
+simplified conditionals and grouped them more better.
+
+replaced !=== with !== in the condition shipping === 0 && customers !== 1.
+
+fixed the conditional checks for printing the warnings and the price.
