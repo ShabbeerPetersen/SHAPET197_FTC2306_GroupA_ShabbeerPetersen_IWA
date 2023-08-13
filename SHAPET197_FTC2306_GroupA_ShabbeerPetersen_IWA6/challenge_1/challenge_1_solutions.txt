@@ -1,0 +1,8 @@
+Regular Expression: This is a pattern used to match strings against a certain format. 
+
+In this case, we used /^[0-9]+$/ to match strings that contain only numbers (0 to 9).
+
+test() Method: This is a method that can be used on a regular expression 
+to check if a string matches the pattern. 
+For example, /^[0-9]+$/.test(primaryPhone) checks if primaryPhone 
+matches the pattern for a valid numerical string.

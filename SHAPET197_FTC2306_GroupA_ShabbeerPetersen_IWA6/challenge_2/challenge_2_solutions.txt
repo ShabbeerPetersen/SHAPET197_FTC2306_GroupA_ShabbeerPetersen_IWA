@@ -1,0 +1,11 @@
+Added proper parentheses around if conditions.
+
+Checked for hourOfDay !== undefined and 
+minuteOfDay !== undefined to ensure the time is known 
+before calculating the balance.
+
+Converted the tax percentage from a string to a number 
+using parseFloat(tax) / 100.
+
+Used balance.toFixed(2) to format and display the balance 
+with 'R' and 2 decimal places.
