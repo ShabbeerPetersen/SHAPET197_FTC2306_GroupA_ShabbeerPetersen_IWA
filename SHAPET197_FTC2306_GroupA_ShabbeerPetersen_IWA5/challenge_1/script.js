@@ -1,11 +1,9 @@
-// Welcome to our online store!
-
 // Messages displayed to users upon certain conditions
 const FREE_WARNING = "Free shipping only applies to single customer orders";
 const BANNED_WARNING =
   "Unfortunately we do not ship to your country of residence";
 
-// User information
+// User info
 const location = "RSA"; // Country, 'RSA' for South Africa
 const currency = "R"; // Currency, 'R' for South African Rand
 const customers = 1; // Number of customers
@@ -14,21 +12,21 @@ let shipping = 0; // defining shipping
 
 // Check where the user is located
 if (location === "RSA") {
-  shipping = 400; // South African shipping cost
+  shipping = 400; // RSA shipping cost
 } else if (location === "NAM") {
-  shipping = 600; // Namibian shipping cost
+  shipping = 600; // NAM shipping cost
 } else {
   shipping = 800; // Other countries' shipping cost
 }
 
 // Items you want to buy
 const shoes = 300 * 1;
-const toys = 100 * 5; //
-const shirts = 150 * 0; // You didn't choose any shirts
+const toys = 100 * 5;
+const shirts = 150 * 0; // No shirts chosen
 const batteries = 35 * 2;
-const pens = 5 * 0; // You didn't choose any pens
+const pens = 5 * 0; // No pens chosen
 
-// Calculate the total cost of your items
+// Calculate the total cost of items
 const totalCost = shoes + toys + shirts + batteries + pens;
 
 // Apply free shipping if conditions are met
