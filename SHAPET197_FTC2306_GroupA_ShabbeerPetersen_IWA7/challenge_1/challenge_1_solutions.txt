@@ -1,0 +1,3 @@
+changed 'value' from string to integer,
+so that javascript can know to sum it,
+instead of concatenate.
