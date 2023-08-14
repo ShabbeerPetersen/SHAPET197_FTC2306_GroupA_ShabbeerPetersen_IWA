@@ -1,5 +1,5 @@
 let date = 2050; // declared with 'let' instead of 'const' to allow reassign.
-const user = "parent"; // named variable 'user' because 'status' deprecated
+const user = "student"; // named variable 'user' because 'status' deprecated
 let count = 0; // declared with 'let' instead of 'const' to adding to value
 
 // Changed all single quotes to double quotes, and all equal-to's to triple equal(equality operator)
