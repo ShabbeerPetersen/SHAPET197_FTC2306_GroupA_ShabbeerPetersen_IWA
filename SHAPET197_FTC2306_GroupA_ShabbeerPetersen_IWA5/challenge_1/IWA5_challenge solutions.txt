@@ -10,6 +10,4 @@ calculated the totalCost properly by adding up all the individual costs.
 
 simplified conditionals and grouped them more better.
 
-replaced !=== with !== in the condition shipping === 0 && customers !== 1.
-
 fixed the conditional checks for printing the warnings and the price.
