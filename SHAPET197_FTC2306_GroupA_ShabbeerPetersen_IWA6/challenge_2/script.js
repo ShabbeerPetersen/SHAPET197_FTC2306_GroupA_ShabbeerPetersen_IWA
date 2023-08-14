@@ -18,17 +18,17 @@ if (
   hourOfDay === 0 &&
   minuteOfDay === 0
 ) {
-  const taxAsDecimal = parseFloat(tax) / 100; // Convert percentage to a decimal
+  const taxAsDecimal = parseFloat(tax) / 100; // Convert percentage to a decimal number
 
-  // calculate your salary after deducting the tax:
+  // calculate salary after deducting the tax:
   const startingAfterTax = salary * (1 - taxAsDecimal);
 
-  // calculate your remaining balance after expenses:
+  // calculate remaining balance after expenses:
   const balance = startingAfterTax - transport - food - rent;
 
-  // display your balance, rounded to 2 decimal places, with the 'R' symbol:
+  // display balance, rounded to 2 decimal places, with the 'R' symbol:
   console.log("Your balance for the day is: R", balance.toFixed(2));
 } else {
-  // If it's not midnight or the time is not known, don't do any calculations.
+  // If it's not midnight or the time is unknown, no calculations are done.
   console.log("It's not the right time to calculate your balance.");
 }
