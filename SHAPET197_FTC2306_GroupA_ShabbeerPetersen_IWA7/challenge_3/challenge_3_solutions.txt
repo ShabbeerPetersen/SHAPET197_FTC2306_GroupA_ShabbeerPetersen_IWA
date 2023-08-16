@@ -1,0 +1,5 @@
+removed whitespaces with .trimEnd
+
+converted all calculated values from string to float
+with 2 decimal places
+

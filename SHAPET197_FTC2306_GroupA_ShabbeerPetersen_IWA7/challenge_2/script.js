@@ -1,6 +1,7 @@
 const nickname = "Timmy";
 const firstname = "Timothy";
 
+// using if else to output depending on condition.
 if (
   (nickname != "" && firstname != "") ||
   (nickname != "" && firstname == "")
