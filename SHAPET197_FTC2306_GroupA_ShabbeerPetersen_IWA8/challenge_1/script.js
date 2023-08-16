@@ -13,6 +13,7 @@ const sarahPostal = "0310";
 
 // Only change below this line
 
+//objects containing data for Leo and Sarah.
 const leo = {
   name: leoName,
   balance: parseFloat(leoBalance).toFixed(2),
