@@ -1,0 +1,11 @@
+Leo does not have surname variable, 
+removed it.
+
+parseFloat() and .toFixed all balances.
+
+'access id' var changed to 'access_id'
+
+changed all '=' to ':' in objects and added
+',' at end of all items
+
+fixed console.log output
