@@ -1,20 +1,32 @@
-Once again, you will need to ensure that the following behaviour works:
+Once again, you will need to ensure that the following 
+behaviour works:
 
-The taxable amount should be subtracted from the salary before expenses are calculated
-The total should be the result of the after-tax amount with all expenses subtracted
+The taxable amount should be subtracted from the salary 
+before expenses are calculated
+The total should be the result of the after-tax amount 
+with all expenses subtracted
  
 
-However, there are some differences from the first time you encountered this functionality:
+However, there are some differences from the first time 
+you encountered this functionality:
 
 All expenses are grouped in the expenses object.
-Instead of having a hardcoded tax amount, there is a tax object that has several reference codes we can use to get different tax amounts. The one that we will use is 913
-Rent is listed using keys that are created from a combination of loading types and sizes.
-The matching key for rent should be created by interpolating the size and lodging variables provided.
-The number provided by this key should be used as the rent amount.
-You don’t have to worry about having space separators between numbers in this version, you can just log it as a single number value, rounded to two decimal places.
+Instead of having a hardcoded tax amount, there is a tax 
+object that has several reference codes we can use to get 
+different tax amounts. The one that we will use is 913
+Rent is listed using keys that are created from a combination 
+of loading types and sizes.
+The matching key for rent should be created by interpolating 
+the size and lodging variables provided.
+The number provided by this key should be used as the rent 
+amount.
+You don’t have to worry about having space separators 
+between numbers in this version, you can just log it as a 
+single number value, rounded to two decimal places.
  
 
-The final value that should be logged to the console should be: 2658.05
+The final value that should be logged to the console 
+should be: 2658.05
 
  
 

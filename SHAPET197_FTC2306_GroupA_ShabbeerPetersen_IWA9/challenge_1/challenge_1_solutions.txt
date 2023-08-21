@@ -1,11 +1,9 @@
-Leo does not have surname variable, 
-removed it.
+parseFloat at const taxAsDecimal
 
-parseFloat() and .toFixed all balances.
+brackets at const startingAfterTax
 
-'access id' var changed to 'access_id'
+ size + "-" + lodging at const type 
 
-changed all '=' to ':' in objects and added
-',' at end of all items
+ added startingAfterTax to calculation in const balance
 
-fixed console.log output
+ logged balance to 2 decimal places,
