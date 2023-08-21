@@ -29,7 +29,7 @@ const rent = {
 
 // You can change below however you want
 
-const taxAsDecimal = parseFloat(tax["913"]) / 100;
+const taxAsDecimal = parseFloat(tax[913]) / 100;
 console.log(taxAsDecimal); // Checking value
 
 const startingAfterTax = salary * (1 - taxAsDecimal);

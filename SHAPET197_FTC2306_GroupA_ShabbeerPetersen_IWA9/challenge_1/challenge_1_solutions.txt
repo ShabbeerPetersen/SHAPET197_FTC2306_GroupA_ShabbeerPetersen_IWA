@@ -1,6 +1,7 @@
-parseFloat at const taxAsDecimal
+parseFloat at taxAsDecimal to convert 913 
+value to float
 
-brackets at const startingAfterTax
+brackets at startingAfterTax
 
  size + "-" + lodging at const type 
 
