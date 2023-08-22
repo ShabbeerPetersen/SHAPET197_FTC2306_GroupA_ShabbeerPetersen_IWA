@@ -1,4 +1,4 @@
-// Selecting elements for Order 1
+// Choosing elements for Order 1
 const order1Root = document.querySelector('[data-key="order1"]');
 const order1Biscuits = order1Root.querySelector(".biscuits .count");
 const order1Donuts = order1Root.querySelector(".donuts .count");
@@ -14,7 +14,7 @@ order1Status.textContent =
     ? "Delivered"
     : "Pending";
 
-// Selecting elements for Order 2
+// Choosing elements for Order 2
 const order2Root = document.querySelector('[data-key="order2"]');
 const order2Biscuits = order2Root.querySelector(".biscuits .count");
 const order2Donuts = order2Root.querySelector(".donuts .count");
@@ -30,7 +30,7 @@ order2Status.textContent =
     ? "Delivered"
     : "Pending";
 
-// Selecting elements for Order 3
+// Choosing elements for Order 3
 const order3Root = document.querySelector('[data-key="order3"]');
 const order3Biscuits = order3Root.querySelector(".biscuits .count");
 const order3Donuts = order3Root.querySelector(".donuts .count");
