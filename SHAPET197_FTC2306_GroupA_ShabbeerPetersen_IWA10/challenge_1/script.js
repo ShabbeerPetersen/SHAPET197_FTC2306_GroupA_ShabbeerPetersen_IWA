@@ -101,7 +101,7 @@ const lastHoliday = new Date(Math.max(...holidayDates));
 // Function to format a date as DD/MM/YYYY
 function formatDate(date) {
   const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // adds 0 to dates
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 }

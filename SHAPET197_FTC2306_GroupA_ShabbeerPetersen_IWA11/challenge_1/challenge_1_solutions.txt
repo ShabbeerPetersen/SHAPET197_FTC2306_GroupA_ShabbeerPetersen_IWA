@@ -1,0 +1,21 @@
+It uses the document.querySelector() method to select the 
+elements with specific data attributes like 
+data-key="order1". This allows you to target each order 
+section specifically.
+
+Inside each order section, it further uses querySelector() 
+to select the specific elements like 
+.biscuits .count, .donuts .count, etc., 
+where the "Loading..." placeholders are located.
+
+It retrieves the values from the corresponding data 
+attributes using the getAttribute() method and updates the 
+text content of these elements with the actual values.
+
+For the status, it checks the value of the data-delivered 
+attribute and displays either "Delivered" or "Pending" 
+accordingly.
+
+The script repeats this process for each order section, 
+replacing the "Loading..." placeholders with the 
+actual values from the data attributes. 
