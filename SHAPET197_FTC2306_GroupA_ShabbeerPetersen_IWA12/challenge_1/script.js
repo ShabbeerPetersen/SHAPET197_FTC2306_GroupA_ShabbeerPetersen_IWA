@@ -53,16 +53,6 @@ for (let i = 1; i <= 3; i++) {
       ? "none"
       : "grayscale(100%)";
 
-    // Change status text color based on STATUS_MAP color
     bookStatus.style.color = statusInfo.color;
-    // if (statusText === "checkedOut") {
-    //  bookStatus.style.color = "orange"; // Apply a separate color for "checkedOut"
-    //  reserveButton.style.filter = 'grayscale(100%)'; // Disable reserve button for "checkedOut"
-    //  checkoutButton.style.filter = 'grayscale(100%)'; // Disable checkout button for "checkedOut"
-    //  checkinButton.style.filter = 'none'; // Enable checkin button for "checkedOut"
-    // }
-    //else {
-    //  bookStatus.style.color = statusInfo.color;
-    // }
   }
 }
