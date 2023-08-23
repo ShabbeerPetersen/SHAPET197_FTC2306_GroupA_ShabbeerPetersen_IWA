@@ -1,0 +1,53 @@
+The following code provides three values as variables, and creates a function called logTwice. The logTwice function should take a provided parameter and log it two times. The expected output is:
+
+ 
+
+Hello, John (35). I love coding!
+
+Hello, John (35). I love coding!
+
+ 
+
+Unfortunately at the moment went attempting to run the code the following error is returned:
+
+ 
+
+hobby is not a function
+
+ 
+
+ 
+
+Summary:
+
+Do not change the provided values
+Edit the code so that the message is logged twice
+ 
+Extra reading material and tools to help you complete this challenge:
+ 
+
+In this challenge you will have to use your knowledge of variables, functions and taking in values/parameters. Some tools to successfully succeed in this challenge include:
+
+Look for syntax errors, review function calls, variable naming conflicts, variable references and variable assignments.
+Functions - JavaScript | MDN
+Storing the information you need — Variables - Learn web development | MDN
+ 
+
+With this challenge, think logically. Read through it.
+
+ 
+
+firstName = 'John';
+age = 35;
+hobby = 'Coding';
+
+const logTwice = () => {
+  console(parameter)
+  console(parameter)
+}
+
+function hobby () {
+  logTwice(`Hello, ${name} (${age}). I love ${hobby}!`)
+}
+
+hobby()
