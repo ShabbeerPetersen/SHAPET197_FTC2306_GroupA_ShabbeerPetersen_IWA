@@ -10,7 +10,7 @@ console.log(user + " " + lastName);
 // const user = 'John';
 // const surname = 'Smith';
 // const fullName = [user, surname].join(' ');
-//// Found the '.join' solution via ChatGPT
+// Found the '.join' solution via ChatGPT
 
 // console.log(fullName);
 
