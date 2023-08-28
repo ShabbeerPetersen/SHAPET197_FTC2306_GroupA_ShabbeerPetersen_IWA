@@ -1,0 +1,77 @@
+The following code snippet should have three functions that are declared outside an object. After creation, these functions are assigned to different objects, after which the calculate method is run on each of the objects.
+
+ 
+
+At the moment the code below gives the following error:
+
+ 
+
+Missing initializer in const declaration
+
+
+The code should log these two values to the console:
+
+48
+12
+ 
+
+Please fix the code above the // Not allowed to change below this comment, while still keeping it as three different functions.
+
+ 
+
+Summary:
+
+Edit only the code above the comment
+Keep the three functions: add, multiply, internal
+Log the values 48 and 12 to the console
+ 
+
+Extra reading material and tools to help you complete this challenge:
+ 
+
+In this challenge you will have to use your knowledge of Function Syntax, Function Calls and Object References to successfully complete this challenge. Here are some resources that might help you in debugging this challenge:
+
+Javascript Function call() (With Examples)
+JavaScript Function and Function Expressions (with Examples)
+How Functions Work in JavaScript – JS Function Code Examples
+Working with objects - JavaScript | MDN
+ 
+
+// script.js
+
+function add = a, b => { a + b }
+
+function multiply = a, b => { a - b }
+
+function internal() {
+	const added = this.add(this.a, this.b)
+	this.multiply(this.a, this.b)
+	return this
+}
+
+// Not allowed to change below this
+
+const example1 = {
+	internal: {
+		a: 2,
+		b: 4,
+		c: 8,
+	},
+	add,
+	multiply,
+  calculate: internal
+}
+
+const example2 = {
+	internal: {
+		a: 2,
+		b: 2,
+		c: 3,
+	},
+	add,
+	multiply,
+  calculate: internal
+}
+
+example1.calculate()
+example2.calculate()
