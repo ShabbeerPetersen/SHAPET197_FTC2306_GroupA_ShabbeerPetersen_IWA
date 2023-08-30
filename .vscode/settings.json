@@ -1,0 +1,5 @@
+{
+  "vscode-edge-devtools.browserFlavor": "Stable",
+  "vs-browser.reload.onSave": true,
+  "vs-browser.columnToShowIn": "Beside"
+}

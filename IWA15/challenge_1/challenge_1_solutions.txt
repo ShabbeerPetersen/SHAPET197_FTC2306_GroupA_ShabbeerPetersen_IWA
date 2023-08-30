@@ -1,0 +1,2 @@
+corrected syntax of functions
+used equality operators that output desired results
