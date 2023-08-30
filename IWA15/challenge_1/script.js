@@ -34,7 +34,6 @@ const extractBiggest = () => {
   }
 };
 
-console.log(firstNumbers);
 // Only edit above
 
 result.push(extractBiggest());
