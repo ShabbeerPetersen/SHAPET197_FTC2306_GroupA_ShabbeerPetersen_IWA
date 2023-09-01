@@ -1,0 +1,545 @@
+This final exercise is a much larger and more complex than 
+previous exercises. The goal is to adequately prepare you 
+for the culminating week-long Capstone Project that you are 
+required to submit, to successfully meet the outcomes for 
+this course.
+
+ 
+
+In this challenge, you are provided with all HTML, CSS and 
+JavaScript code used in a web app called “Kitchen Express”.
+
+ 
+
+It is a product that will be sold to restaurants to help 
+them track customer orders from the moment they are taken 
+by a waiter until they are finally served to the customer. 
+It also records the table number and the exact time that the 
+order was created.
+
+ 
+
+All previous HTML, CSS and JavaScript files were created by a 
+senior JavaScript developer. Unfortunately, they just phoned 
+saying that they caught the flu and that the doctor told them 
+to stay in bed for the remainer of the week. This means that 
+the responsibility now falls on you to complete the remaining 
+sections of the code so that the product can still be launched 
+this week.
+
+ 
+
+Luckily the team is happy with everything that has been 
+created up until now. This means that you will only have 
+to modify the scripts.js file, where most of the 
+event-specific behaviour is located. All event listeners and 
+handlers have been created already. However, only the first 
+handleDragOver handler’s logic has been written and documented. 
+You will be required to add the logic for all remaining event 
+handlers (making use of the data.js and view.js file exports) 
+to ensure that the following user stories are met:
+
+The “Add Order” button should start as focused, 
+meaning space/enter can be pressed immediately to add an order.
+Click the “?” icon should open a “Help” overlay that provides 
+instructions on how to use the app.
+If the “Help” overlay is open, clicking the “Close” button 
+should remove the overlay.
+If any overlay is closed the focus should be returned to 
+the “Add Order” button.
+Clicking “Add Order” should open an “Add Order” overlay that 
+allows the entering of order text and an associated table.
+Clicking “Cancel” in the “Add Order” overlay should remove 
+the overlay without adding the information as an order.
+Clicking the “Add” button in the “Add Order” overlay should 
+remove the overlay and add a new order to the “Ordered” column.
+If the “Add Order” overlay is closed 
+(either with “Cancel” or “Add”) and it is opened again it 
+should be blank (not have information from the last time it 
+was opened).
+If an order has been added and it is clicked on the 
+“Edit Order” overlay should appear.
+If the “Delete” button is pressed in the Edit Order overlay 
+the overlay should be closed and the order should be removed 
+entirely.
+If the “Cancel” button is pressed in the “Edit Order” overlay 
+it should close the overlay without applying the changes 
+entered into the overlay inputs.
+If the “Update” button is pressed in the “Edit Order” overlay 
+it should close the overlay and apply the changes entered to 
+the relevant order.
+If the “Status” value is changed and “Update” is pressed in 
+the “Edit Order” overlay then the order should be moved to 
+the column selected in the dropdown.
+
+
+
+//index.html
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kitchen Express</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="scripts.js" defer type="module"></script>
+    <script src="data.js" defer type="module"></script>
+    <script src="view.js" defer type="module"></script>
+  </head>
+
+  <body>
+    <header class="actions">
+      <h1 class="sr-only">Kitchen Express</h1>
+      <div class="actions__inner">
+        <button class="button button_primary" data-add>Add Order</button>
+      </div>
+    </header>
+
+    <dialog class="overlay" data-help-overlay>
+      <h2 class="overlay__title">Help</h2>
+      <p>
+        <strong
+          >To use the app, you can start by adding a new order by clicking the
+          "add order" button.</strong
+        >
+      </p>
+      <p>
+        You can view and update orders by selecting them directly from the list.
+        Inside the order, you can manually change information associated with an
+        order or update its status. However, note that you can quickly change
+        the status of an order by drag it between the three different columns
+        with your mouse.
+      </p>
+      <div class="overlay__row">
+        <button class="button" type="button" data-help-cancel>Close</button>
+      </div>
+    </dialog>
+
+    <dialog class="overlay" data-add-overlay>
+      <div class="overlay__top">
+        <h2 class="overlay__title">Add Order</h2>
+      </div>
+
+      <form class="overlay__form" data-add-form id="add-form">
+        <label class="overlay__field">
+          <div class="overlay__label">Item</div>
+          <input class="overlay__input" data-add-title name="title" required />
+        </label>
+
+        <label class="overlay__field">
+          <div class="overlay__label">Table</div>
+          <select
+            class="overlay__input overlay__input_select"
+            data-add-table
+            name="table"
+          ></select>
+        </label>
+      </form>
+      <div class="overlay__row">
+        <button class="button" type="button" data-add-cancel>Cancel</button>
+        <button class="button button_primary" type="submit" form="add-form">
+          Add
+        </button>
+      </div>
+    </dialog>
+
+    <dialog class="overlay" data-edit-overlay>
+      <div class="overlay__top">
+        <h2 class="overlay__title">Edit Order</h2>
+        <button class="overlay__delete" data-edit-delete>Delete</button>
+      </div>
+
+      <form class="overlay__form" data-edit-form id="edit-form">
+        <input hidden name="id" data-edit-id />
+
+        <label class="overlay__field">
+          <div class="overlay__label">Item</div>
+          <input class="overlay__input" data-edit-title name="title" required />
+        </label>
+
+        <label class="overlay__field">
+          <div class="overlay__label">Table</div>
+          <select
+            class="overlay__input overlay__input_select"
+            data-edit-table
+            name="table"
+          ></select>
+        </label>
+
+        <label class="overlay__field">
+          <div class="overlay__label">Status</div>
+
+          <select
+            class="overlay__input overlay__input_select"
+            data-edit-column
+            name="column"
+          >
+            <option value="ordered">Ordered</option>
+            <option value="preparing">Preparing</option>
+            <option value="served">Served</option>
+          </select>
+        </label>
+      </form>
+      <div class="overlay__row">
+        <button class="button" type="button" data-edit-cancel>Cancel</button>
+        <button class="button button_primary" type="submit" form="edit-form">
+          Update
+        </button>
+      </div>
+    </dialog>
+
+    <h2 class="sr-only">Orders</h2>
+
+    <div class="grid" data-grid>
+      <section class="grid__column" data-area="ordered">
+        <h2 class="grid__title">🤵 Ordered</h2>
+        <div class="grid__content" data-column="ordered"></div>
+      </section>
+
+      <section class="grid__column" data-area="preparing">
+        <h2 class="grid__title">👩‍🍳 Preparing</h2>
+        <div class="grid__content" data-column="preparing"></div>
+      </section>
+
+      <section class="grid__column grid__column_last" data-area="served">
+        <h2 class="grid__title">👩‍💼 Served</h2>
+        <div class="grid__content" data-column="served"></div>
+      </section>
+    </div>
+
+    <button class="help" data-help>?</button>
+    <div class="backdrop"></div>
+  </body>
+</html>
+
+
+
+//scripts.js
+
+/**
+ * A handler that fires when a user drags over any element inside a column. In
+ * order to determine which column the user is dragging over the entire event
+ * bubble path is checked with `event.path` (or `event.composedPath()` for
+ * browsers that don't support `event.path`). The bubbling path is looped over
+ * until an element with a `data-area` attribute is found. Once found both the
+ * active dragging column is set in the `state` object in "data.js" and the HTML
+ * is updated to reflect the new column.
+ *
+ * @param {Event} event 
+ */
+const handleDragOver = (event) => {
+    event.preventDefault();
+    const path = event.path || event.composedPath()
+    let column = null
+
+    for (const element of path) {
+        const { area } = element.dataset
+        if (area) {
+            column = area
+            break;
+        }
+    }
+
+    if (!column) return
+    updateDragging({ over: column })
+    updateDraggingHtml({ over: column })
+}
+
+
+const handleDragStart = (event) => {}
+const handleDragEnd = (event) => {}
+const handleHelpToggle = (event) => {}
+const handleAddToggle = (event) => {}
+const handleAddSubmit = (event) => {}
+const handleEditToggle = (event) => {}
+const handleEditSubmit = (event) => {}
+const handleDelete = (event) => {}
+
+html.add.cancel.addEventListener('click', handleAddToggle)
+html.other.add.addEventListener('click', handleAddToggle)
+html.add.form.addEventListener('submit', handleAddSubmit)
+
+html.other.grid.addEventListener('click', handleEditToggle)
+html.edit.cancel.addEventListener('click', handleEditToggle)
+html.edit.form.addEventListener('submit', handleEditSubmit)
+html.edit.delete.addEventListener('click', handleDelete)
+
+html.help.cancel.addEventListener('click', handleHelpToggle)
+html.other.help.addEventListener('click', handleHelpToggle)
+
+for (const htmlColumn of Object.values(html.columns)) {
+    htmlColumn.addEventListener('dragstart', handleDragStart)
+    htmlColumn.addEventListener('dragend', handleDragEnd)
+}
+
+for (const htmlArea of Object.values(html.area)) {
+    htmlArea.addEventListener('dragover', handleDragOver)
+}
+
+
+//views.js
+
+import { TABLES, COLUMNS, state } from './data.js'
+
+/**
+ * Takes any order as an object literal (as saved in state) and converts it a
+ * HTML element that can be appended to the DOM. Creating order elements
+ * individually prevents the JavaScript having to re-render the entire DOM every
+ * time an new order is created.
+ *
+ * @param {object} order 
+ * @returns {HTMLElement}
+ */
+export const createOrderHtml = (order) => {
+    const { id, title, table, created } = order
+
+    const element = document.createElement('div')
+    element.className = 'order'
+    element.draggable = true
+    element.dataset.id = id
+
+    const hours = created.getHours().toString().padStart(2, '0')
+    const minutes = created.getMinutes().toString().padStart(2, '0')
+
+    element.innerHTML = /* html */ `
+        <div class="order__title" data-order-title>${title}</div>
+        
+        <dl class="order__details">
+            <div class="order__row">
+                <dt>Table:</dt>
+                <dd class="order__value" data-order-table>${table}</dd>
+            </div>
+
+            <div class="order__row">
+                <dt>Ordered:</dt>
+                <dd class="order__value">${hours}:${minutes}</dd>
+            </div>
+        </dl>
+    `
+
+    return element
+}
+
+/**
+ * Since the tables in use, and their identification can be configured before
+ * the start of the app (in data.js), the actual options returned should be
+ * dynamically added to the respective "<select>" elements in the HTML after
+ * JavaScript loads. This function executes the logic thar reads the current
+ * tables and creates the HTML to select them.
+ *
+ * @returns {HTMLElement}
+ */
+const createTableOptionsHtml = () => {
+    const fragment = document.createDocumentFragment()
+
+    for (const singleTable of TABLES) {
+        const option = document.createElement('option')
+        option.value = singleTable
+        option.innerText = singleTable
+        fragment.appendChild(option)
+    }
+
+    return fragment
+}
+
+/**
+ * An object literal that contains references to all the HTML elements
+ * referenced through the operation of the app either upon initialisation or
+ * while its running (via event listeners). This ensure that all UI elements can
+ * be accessed and seen in a structured manner in a single data structure.
+ *
+ * Note that the "column" and "area" properties created as empty and then added
+ * dynamically by a loop that runs over the COLUMNS array.
+ */
+export const html = {
+    columns: {},
+    area: {},
+    add: {
+        overlay: document.querySelector('[data-add-overlay]'),
+        form: document.querySelector('[data-add-form]'),
+        cancel: document.querySelector('[data-add-cancel]'),
+        title: document.querySelector('[data-add-title]'),
+        table: document.querySelector('[data-add-table]'),
+    },
+    edit: {
+        overlay: document.querySelector('[data-edit-overlay]'),
+        form: document.querySelector('[data-edit-form]'),
+        cancel: document.querySelector('[data-edit-cancel]'),
+        title: document.querySelector('[data-edit-title]'),
+        table: document.querySelector('[data-edit-table]'),
+        id: document.querySelector('[data-edit-id]'),
+        column: document.querySelector('[data-edit-column]'),
+        delete: document.querySelector('[data-edit-delete]')
+    },
+    help: {
+        overlay: document.querySelector('[data-help-overlay]'),
+        cancel: document.querySelector('[data-help-cancel]'),
+    },
+    other: {
+        grid: document.querySelector('[data-grid]'),
+        help: document.querySelector('[data-help]'),
+        add: document.querySelector('[data-add]'),
+        order: document.querySelector('[data-order]'),
+    }
+}
+
+for (const columnName of COLUMNS) {
+    html.columns[columnName] = document.querySelector(`[data-column="${columnName}"]`)
+    html.area[columnName] = document.querySelector(`[data-area="${columnName}"]`)
+}
+
+/**
+ * Maps over all columns in the HTML and removes any dragging hover effects
+ * except for the current column that is being dragged over (if at all). If the
+ * "over" value is not specified, then all columns will be cleared of any hover
+ * effects.
+ *
+ * @param {object} newDragging 
+ */
+export const updateDraggingHtml = (newDragging) => {
+    const { over = state.dragging.over } = newDragging
+
+    for (const columnName of COLUMNS) {
+        const value = columnName === over ? 'rgba(0, 160, 70, 0.2)' : ''
+        html.area[columnName].style.backgroundColor = value
+    }
+}
+
+/**
+ * Takes a specific order HTML and clones it into memory. The original HTML
+ * element is then removed from the DOM, while the cloned duplicate is added to
+ * the bottom of the column that is specified.
+ *
+ * @param {string} id - The "id" value of a specific order object. Note that
+ * only the "id" value is used, not the entire object.
+ *
+ * @param {string} newColumn - The name of the column that the order should be
+ * moved to. This should coincide with one of the values present in the COLUMNS
+ * array in "data.js"
+ */
+export const moveToColumn = (id, newColumn) => {
+    const htmlSource = document.querySelector(`[data-id="${id}"]`) 
+    const duplicate = htmlSource.cloneNode(true)
+    html.columns[newColumn].appendChild(duplicate)
+    htmlSource.remove()
+}
+
+/**
+ * Starts the app focused on the "add order" button. This means that users can
+ * immediately started adding an order by pressing the enter or spacebar.
+ */
+html.other.add.focus()
+
+
+html.add.table.appendChild(createTableOptionsHtml())
+html.edit.table.appendChild(createTableOptionsHtml())
+
+
+//data.js
+
+/**
+ * A pre-defined list of tables IDs to be used in the app. This can be
+ * configured before the app is started, and allows the app to be used in
+ * different environments.
+ */
+export const TABLES = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13'
+]
+
+/**
+ * The different states that an order can be in. This can not be configured
+ * before-hand just yet since the app doesn't yet create the HTML dynamically.
+ * However there is room to build this functionality out at the future point.
+ */
+export const COLUMNS = [
+    'ordered',
+    'preparing',
+    'served',
+]
+
+/**
+ * The active state of the app expressed as an object literal. This should serve
+ * as the single source of truth for the state that the app is in. While it
+ * would be easier to save this state in the DOM, it would be much harder to
+ * maintain, update and extends since the DOM itself can not be persisted or
+ * saved in storage (either local or remote).
+ */
+export const state = {
+    orders: {},
+    dragging: {
+        source: null,
+        over: null,
+    }
+}
+
+/**
+ * Given that an order can have the exact same title, table and column, a way is
+ * required to uniquely identify an order. This function creates a unique ID by
+ * combining a random number, a timestamp and another random number. While in
+ * theory it is unlikely for two orders to have the exact same timestamp up to
+ * the millisecond, it is still possible with edge cases like different
+ * timezones. Therefore two additional random numbers are added to the ID to
+ * ensure additional uniqueness.
+ */
+const createUniqueId = () => {
+    const random1 = Math.floor(Math.random() * 10000000000000000)
+    const random2 = Math.floor(Math.random() * 10000000000000000)
+    const timestamp = new Date().getTime()
+    return `${random1}-${timestamp}-${random2}`
+}
+
+/**
+ * A factory function that creates an order object literal representing an
+ * actual order in the app state. It is wrapped in a factory function instead of
+ * just being created directly since several values are created automatically
+ * such as a unique ID and the creation date of the order.
+ *
+ * @param {object} props 
+ * @returns {object}
+ */
+export const createOrderData = (props) => {
+    const { title, table, column } = props
+
+    return {
+        title,
+        table,
+        column,
+        id: createUniqueId(),
+        created: new Date(),
+    }
+}
+
+/**
+ * A function that updates the state of the app to reflect current order that is
+ * being dragged around the screen by a user, and also which column (if any) it
+ * is currently being dragged over. This functionality is wrapped in a factory
+ * function in order to ensure that the state is not updated if attempting to
+ * update to the same exact values again (since the DOM event would fire each
+ * time a new HTML element is dragged over, regardless whether it part of the
+ * same column or not)
+ *
+ * @param {object} newDragging 
+ */
+export const updateDragging = (newDragging) => {
+    const { source = state.dragging.source, over = state.dragging.over } = newDragging
+    if (over === state.dragging.over) return
+
+    state.dragging = {
+        source,
+        over,
+    }
+}
