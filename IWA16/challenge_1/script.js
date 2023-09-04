@@ -92,20 +92,17 @@ const createHtml = (athlete) => {
   const hours = Math.floor(total / 60);
   const minutes = total % 60;
 
-  list.innerHTML = /* html */ `
-    <dt>Athlete</dt>
-    <dd>${firstName} ${surname}</dd>
-
-    <dt>Total Races</dt>
-    <dd>${races.length}</dd>
-
-    <dt>Event Date (Latest)</dt>
-    <dd>${day} ${month} ${year}</dd>
-
-    <dt>Total Time (Latest)</dt>
-    <dd>${hours.toString().padStart(2, "0")}:${minutes
+  // html
+  list.innerHTML = `
+    <dt>Athlete: ${firstName} ${surname} </dt>
+    <dt><br></dt>
+    <dt>Total Races: ${races.length}</dt>
+    <dt><br></dt>
+    <dt>Event Date (Latest): ${day} ${month} ${year}</dt>
+    <dt><br></dt>
+    <dt>Total Time (Latest): ${hours.toString().padStart(2, "0")}:${minutes
     .toString()
-    .padStart(2, "0")}</dd>
+    .padStart(2, "0")}</dt>
   `;
 
   fragment.appendChild(list);
