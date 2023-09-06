@@ -7,14 +7,11 @@ import {
 import { createOrderData, updateDragging } from "./data.js";
 
 let editedColumn = null;
+
 /**
- * A handler that fires when a user drags over any element inside a column. In
- * order to determine which column the user is dragging over the entire event
- * bubble path is checked with `event.path` (or `event.composedPath()` for
- * browsers that don't support `event.path`). The bubbling path is looped over
- * until an element with a `data-area` attribute is found. Once found both the
- * active dragging column is set in the `state` object in "data.js" and the HTML
- * is updated to reflect the new column.
+ * A handler that fires when a user drags over any element inside a column.
+ * It determines which column the user is dragging over based on the
+ * "data-area" attribute of the elements in the event's path.
  *
  * @param {Event} event
  */
@@ -23,6 +20,7 @@ const handleDragOver = (event) => {
   const path = event.path || event.composedPath();
   let column = null;
 
+  // Loop through the event path to find the column being dragged over.
   for (const element of path) {
     const { area } = element.dataset;
     if (area) {
@@ -32,15 +30,28 @@ const handleDragOver = (event) => {
   }
 
   if (!column) return;
+
+  // Update the dragging state and HTML to reflect the new column.
   updateDragging({ over: column });
   updateDraggingHtml({ over: column });
   editedColumn = column;
 };
 
+/**
+ * A handler that fires when a drag operation starts.
+ *
+ * @param {Event} event
+ */
 const handleDragStart = (event) => {
   console.log("I'm here too!");
 };
 
+/**
+ * A handler that fires when a drag operation ends. It moves an order to
+ * a new column if applicable.
+ *
+ * @param {Event} event
+ */
 const handleDragEnd = (event) => {
   event.preventDefault();
   const currentOrderId = event.target.closest(".order").getAttribute("data-id");
@@ -50,6 +61,7 @@ const handleDragEnd = (event) => {
   );
 
   if (currentOrderId && targetColumn) {
+    // Move the order to the new column.
     moveToColumn(currentOrderId, targetColumn);
   }
 
@@ -57,8 +69,7 @@ const handleDragEnd = (event) => {
 };
 
 /**
- * A handler that takes the dialog element's "open" property and sets it to
- * true if false and false if true, displaying the dialog overlay or hiding it.
+ * A handler that toggles the help dialog's visibility.
  *
  * @param {Event} event
  */
@@ -69,8 +80,8 @@ const handleHelpToggle = (event) => {
 };
 
 /**
- * A handler that displays the "data-add-overlay" dialog element, puts the focus
- * on the "Add order" button and resets the form if cancel is clicked
+ * A handler that toggles the add order dialog's visibility and resets
+ * the form if canceled.
  *
  * @param {Event} event
  */
@@ -84,9 +95,7 @@ const handleAddToggle = (event) => {
 };
 
 /**
- * A handler that takes the form submission data, gets it in object form with
- * the createOrderData() function, and then passes it into the createOrderHtml()
- * function to get the form inputs in html format.
+ * A handler that handles the submission of the add order form.
  *
  * @param {Event} event
  */
@@ -99,11 +108,18 @@ const handleAddSubmit = (event) => {
   const orderData = createOrderData({ table, title, column });
   const orderElement = html.columns.ordered;
 
+  // Append the new order HTML to the ordered column.
   orderElement.appendChild(createOrderHtml(orderData));
   html.add.overlay.open = false;
   html.add.form.reset();
 };
 
+/**
+ * A handler that toggles the edit order dialog's visibility and populates
+ * it with the order's data.
+ *
+ * @param {Event} event
+ */
 const handleEditToggle = (event) => {
   const targetOrder = event.target.closest(".order");
   const isEditOpen = html.edit.overlay;
@@ -121,6 +137,7 @@ const handleEditToggle = (event) => {
     ).textContent;
     const orderedColumn = targetOrder.parentNode.getAttribute("data-column");
 
+    // Populate the edit form with order data.
     html.edit.title.value = orderTitle;
     html.edit.table.value = orderTable;
     html.edit.id.value = orderId;
@@ -128,38 +145,51 @@ const handleEditToggle = (event) => {
   }
 };
 
+/**
+ * A handler that handles the submission of the edit order form.
+ *
+ * @param {Event} event
+ */
 const handleEditSubmit = (event) => {
   event.preventDefault();
   const currentOrderId = html.edit.id.value;
   const currentTitleElement = document.querySelector(
     `[data-id="${currentOrderId}"] .order__title`
   );
-  const currenttableElement = document.querySelector(
+  const currentTableElement = document.querySelector(
     `[data-id="${currentOrderId}"] .order__value[data-order-table]`
   );
 
   const editedTitle = html.edit.title.value;
   const editedTable = html.edit.table.value;
-  const editeColumn = html.edit.column.value;
+  const editedColumn = html.edit.column.value;
 
+  // Update the order's title and table, then move it to the new column.
   currentTitleElement.innerText = editedTitle;
-  currenttableElement.innerText = editedTable;
-
-  moveToColumn(currentOrderId, editeColumn);
+  currentTableElement.innerText = editedTable;
+  moveToColumn(currentOrderId, editedColumn);
 
   html.edit.overlay.open = false;
 };
 
+/**
+ * A handler that handles the deletion of an order.
+ *
+ * @param {Event} event
+ */
 const handleDelete = (event) => {
   const currentOrderId = html.edit.id.value;
   const currentOrderElement = document.querySelector(
     `[data-id="${currentOrderId}"]`
   );
 
+  // Remove the order element from the DOM.
   currentOrderElement.remove();
 
   html.edit.overlay.open = false;
 };
+
+// Event listeners for various interactions in your application.
 
 html.add.cancel.addEventListener("click", handleAddToggle);
 html.other.add.addEventListener("click", handleAddToggle);
@@ -172,6 +202,8 @@ html.edit.delete.addEventListener("click", handleDelete);
 
 html.help.cancel.addEventListener("click", handleHelpToggle);
 html.other.help.addEventListener("click", handleHelpToggle);
+
+// Event listeners for drag-and-drop functionality.
 
 for (const htmlColumn of Object.values(html.columns)) {
   htmlColumn.addEventListener("dragstart", handleDragStart);
