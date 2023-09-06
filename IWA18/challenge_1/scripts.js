@@ -42,10 +42,6 @@ const handleDragOver = (event) => {
  *
  * @param {Event} event
  */
-const handleDragStart = (event) => {
-  console.log("I'm here too!");
-};
-
 /**
  * A handler that fires when a drag operation ends. It moves an order to
  * a new column if applicable.
