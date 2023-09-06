@@ -20,7 +20,7 @@ const handleDragOver = (event) => {
   const path = event.path || event.composedPath();
   let column = null;
 
-  // Loop through the event path to find the column being dragged over.
+  // Loop through path to find the column hovered over.
   for (const element of path) {
     const { area } = element.dataset;
     if (area) {
@@ -95,7 +95,7 @@ const handleAddToggle = (event) => {
 };
 
 /**
- * A handler that handles the submission of the add order form.
+ * A handler for the submission of the add order form.
  *
  * @param {Event} event
  */
@@ -164,7 +164,7 @@ const handleEditSubmit = (event) => {
   const editedTable = html.edit.table.value;
   const editedColumn = html.edit.column.value;
 
-  // Update the order's title and table, then move it to the new column.
+  // Update the order, then move it to the new column.
   currentTitleElement.innerText = editedTitle;
   currentTableElement.innerText = editedTable;
   moveToColumn(currentOrderId, editedColumn);
@@ -173,7 +173,7 @@ const handleEditSubmit = (event) => {
 };
 
 /**
- * A handler that handles the deletion of an order.
+ * A handler for the deletion of an order.
  *
  * @param {Event} event
  */
@@ -183,13 +183,13 @@ const handleDelete = (event) => {
     `[data-id="${currentOrderId}"]`
   );
 
-  // Remove the order element from the DOM.
+  // Remove the order element.
   currentOrderElement.remove();
 
   html.edit.overlay.open = false;
 };
 
-// Event listeners for various interactions in your application.
+// Event listeners for different functions.
 
 html.add.cancel.addEventListener("click", handleAddToggle);
 html.other.add.addEventListener("click", handleAddToggle);
